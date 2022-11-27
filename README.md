@@ -1,69 +1,61 @@
-# AirBnB clone - The console
+# Synopsis
 
-![hbnb-screenshot](https://github.com/lroudge/AirBnB_clone/blob/master/img/hbnb_screenshot.png)
+> The Airbnb clone project for which we are creating a copy of the [Airbnb](https://www.airbnb.com/).
+> Only some features will be implemented and will be listed below once completed.
+> At this stage, we are implementing an additional storage option. Based on which 
+> database is chosen (file storage or database storage), JSON is used or
+> MySQL and SQLalchemy is used via Python. Fabric is used for application deployment.
 
-## Description
 
-This team project is part of the Holberton School Full-Stack Software Engineer program.
-It's the first step towards building a first full web application: an AirBnB clone.
-This first step consists of a custom command-line interface for data management, and the base classes for the storage of this data.
+## Features
 
-## Usage
+### Command Interpreter
 
-The console works both in interactive mode and non-interactive mode, much like a Unix shell.
-It prints a prompt **(hbnb)** and waits for the user for input.
+#### Description
 
-| Command                                       | Example                                                                                                                                   |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Run the console                               | `./console.py`                                                                                                                            |
-| Quit the console                              | `(hbnb) quit`                                                                                                                             |
-| Display the help for a command                | `(hbnb) help <command>`                                                                                                                   |
-| Create an object (prints its id)              | `(hbnb) create <class>`                                                                                                                   |
-| Show an object                                | `(hbnb) show <class> <id>` or `(hbnb) <class>.show(<id>)`                                                                                 |
-| Destroy an object                             | `(hbnb) destroy <class> <id>` or `(hbnb) <class>.destroy(<id>)`                                                                           |
-| Show all objects, or all instances of a class | `(hbnb) all` or `(hbnb) all <class>`                                                                                                      |
-| Update an attribute of an object              | `(hbnb) update <class> <id> <attribute name> "<attribute value>"` or `(hbnb) <class>.update(<id>, <attribute name>, "<attribute value>")` |
+The Command Interpreter is used to manage the whole application's functionality from the command line, such as:
++ Create a new object.
++ Retrieve an object from a file, database, etc.
++ Execute operation on objects. e.g. Count, compute statistics, etc.
++ Update object's attributes.
++ Destroy an object.
 
-Non-interactive mode example
+#### Usage
 
-```bash
-$ echo "help" | ./console.py
-(hbnb)
+To launch the console application in interactive mode simply run:
 
-Documented commands (type help <topic>):
-========================================
-EOF  all  count  create  destroy  help  quit  show  update
-```
+```console.py ```
 
-## Models
+or to use the non-interactive mode run:
 
-The folder [models](./models/) contains all the classes used in this project.
+```echo "your-command-goes-here" | ./console.py ```
 
-| File                                    | Description                                          | Attributes                                                                                                                       |
-| --------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| [base_model.py](./models/base_model.py) | BaseModel class for all the other classes            | id, created_at, updated_at                                                                                                       |
-| [user.py](./models/user.py)             | User class for future user information               | email, password, first_name, last_name                                                                                           |
-| [amenity.py](./models/amenity.py)       | Amenity class for future amenity information         | name                                                                                                                             |
-| [city.py](./models/city.py)             | City class for future location information           | state_id, name                                                                                                                   |
-| [state.py](./models/state.py)           | State class for future location information          | name                                                                                                                             |
-| [place.py](./models/place.py)           | Place class for future accomodation information      | city_id, user_id, name, description, number_rooms, number_bathrooms, max_guest, price_by_night, latitude, longitude, amenity_ids |
-| [review.py](./models/review.py)         | Review class for future user/host review information | place_id, user_id, text                                                                                                          |
+#### Commands
 
-## File storage
+Commands | Description | Usage
+-------- | ----------- |-------- |
+**help** or **?**| Displays the documented commands. | **help**
+**quit**     | Exits the program. | **quit**
+**EOF**      | Ends the program. Used when files are passed into the program. | N/A
+**create**  | Creates a new instance of the \<class_name\>. Creates a Json file with the object representation. and prints the id of created object. | **create** \<class_name\>
+**show**    | Prints the string representation of an instance based on the class name and id. | **show** \<class_name class_id\>
+**destroy** | Deletes and instance base on the class name and id. | **destroy** \<class_name class_id\>
+**all** | Prints all string representation of all instances based or not on the class name | **all** or **all** \<class_name class_id\>
+**update** | Updates an instance based on the class name and id by adding or updating attribute | **update** \<class_name class_id key value\>
 
-The folder [engine](./models/engine/) manages the serialization and deserialization of all the data, following a JSON format.
-
-A FileStorage class is defined in [file_storage.py](./models/engine/file_storage.py) with methods to follow this flow:
-`<object> -> to_dict() -> <dictionary> -> JSON dump -> <json string> -> FILE -> <json string> -> JSON load -> <dictionary> -> <object>`
-
-The [**init**.py](./models/__init__.py) file contains the instantiation of the FileStorage class called **storage**, followed by a call to the method reload() on that instance.
-This allows the storage to be reloaded automatically at initialization, which recovers the serialized data.
+## Resources
+* Fabric: [Usage1](https://www.digitalocean.com/community/tutorials/how-to-use-fabric-to-automate-administration-tasks-and-deployments), [Usage2](https://www.pythonforbeginners.com/systems-programming/how-to-use-fabric-in-python), [Documenation](http://www.fabfile.org/)
+* Nginx: [Beginner's Config file](http://nginx.org/en/docs/beginners_guide.html), [Root vs Alias](https://blog.heitorsilva.com/en/nginx/diferenca-entre-root-e-alias-do-nginx/), 
 
 ## Tests
 
-All the code is tested with the **unittest** module.
-The test for the classes are in the [test_models](./tests/test_models/) folder.
+If you wish to run at the test for this application all of the test are located
+under the **test/** folder and can execute all of them by simply running:
 
-## Authors
+```python3 -m unittest discover tests ```
 
-- [Arthur Nebyu Abayneh](Nebyouabayneh@gmail.com)
+from the root directory.
+
+## Bugs
+
++ No known bugs at this time.
